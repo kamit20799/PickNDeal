@@ -1,0 +1,7 @@
+retailer
+johndoe+953@example.com
+P@ssw0rd
+=============================
+supplier
+christui+978@example.com
+P@ssw0rd
