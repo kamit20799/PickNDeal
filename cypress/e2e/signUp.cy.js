@@ -1,23 +1,29 @@
 /* Test Case Covered: TC001, TC002, TC003, TC004, TC005, TC006, TC007, TC008, TC009 */
 
+// Import the signObject from the pageObjects directory
 import signObject from "../pageObjects/signUp";
 
+// Describe block for the "Sign Up Page" test suite
 describe("Sign Up Page", () => {
   beforeEach(() => {
-    cy.visit("user/register");
+    // Visit the registration page before each test case
+    cy.visit("user/register");        //using environment
   })
 
   const signup = new signObject()
 
   /* TC001 */
   it("Sign Up as a Retailer with Valid Details", () => {
+    // Click the "Sign Up" button and verify welcome text and URL
     cy.get(signup.button).click()
     cy.verifyURL('register')
     cy.get(signup.h1).contains(signup.welcome_txt);
     
+    // Generate a new email address with random function and write it to a text file
     let newEmail = "johndoe+" + Math.random().toString().substr(2, 3) + "@example.com"
     cy.writeFile('Retailer_email.txt', newEmail)
 
+    // Fill in the sign up form with valid details and verify success message
     cy.get(signup.firstName).type("John");
     cy.get(signup.lastName).type("jpe");
     cy.get(signup.email).type(newEmail);
@@ -28,6 +34,7 @@ describe("Sign Up Page", () => {
     cy.verifyText(signup.alert, 'successfully')               
   })
 
+  // Other test cases have similar structures with different scenarios and verifications
 
   /* TC002 */
   it("Sign Up as a Supplier with Valid Details", () => {
@@ -39,6 +46,7 @@ describe("Sign Up Page", () => {
     let newEmail = "christui+" + Math.random().toString().substr(2, 3) + "@example.com"
     cy.writeFile('Supplier_email.txt', newEmail)
 
+    //Sign Up using Commands
     cy.SignUp('Chris', 'Tui', newEmail, '1234567890', 'P@ssw0rd', 'P@ssw0rd')
     cy.verifyText(signup.alert, 'successfully')
   })
