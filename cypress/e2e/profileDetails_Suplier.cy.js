@@ -121,6 +121,7 @@ describe('Adding Profile Details', () => {
         cy.get(login.dayDropdown).select('Friday')
 
         /*  TC049   */
+        // Enter time
         cy.get(login.timeFrom1).type('01:15')
         cy.get(login.timeFrom2).type('02:10')
 
